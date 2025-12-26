@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Driving Clearance Report System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      html,
+      body {
+        height: 100vh; /* lock to viewport height */
+        margin: 0;
+        padding: 0;
+        overflow-y: hidden; /* remove vertical scroll */
+        display: flex;
+        align-items: center; /* vertical center */
+        justify-content: center; /* horizontal center */
+      }
+
+      /* Background gradient */
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", "Inter", Arial, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Glassmorphism card */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+        border-radius: 24px;
+        padding: 48px 40px;
+        max-width: 480px;
+        width: 100%;
+        backdrop-filter: blur(8px);
+        border: 1.5px solid rgba(180, 200, 255, 0.18);
+        box-sizing: border-box;
+        text-align: center; /* ensures all text inside is centered */
+      }
+
+      /* Logo + Title */
+      .icon-title {
+        display: flex;
+        flex-direction: column; /* stack logo and title vertically */
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .icon-title img {
+        width: 100px;
+        height: auto;
+        filter: drop-shadow(0 2px 8px #b6c6e6);
+        border-radius: 12px;
+      }
+
+      .icon-title h1 {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #1e293b;
+        margin: 0;
+        line-height: 1.3;
+        text-align: center; /* center the title */
+      }
+
+      /* Description */
+      .desc {
+        font-size: 1rem;
+        color: #334155;
+        text-align: center;
+        line-height: 1.6;
+        margin: 16px auto 28px;
+        width: 85%;
+      }
+
+      /* Actions */
+      .actions {
+        display: flex;
+        gap: 18px;
+        justify-content: center;
+      }
+
+      .actions a {
+        font-size: 1.08rem;
+        font-weight: 700;
+        padding: 14px 26px;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.18s ease;
+        box-shadow: 0 2px 8px rgba(30, 41, 59, 0.07);
+      }
+
+      .primary {
+        background: linear-gradient(90deg, #0f172a 60%, #1e293b 100%);
+        color: #fff;
+      }
+
+      .primary:hover {
+        background: linear-gradient(90deg, #0c0c41 60%, #0b2041 100%);
+        transform: translateY(-2px) scale(1.03);
+      }
+
+      .secondary {
+        background: #fff;
+        color: #2563eb;
+        border: 2px solid #2563eb;
+      }
+
+      .secondary:hover {
+        background: #1e293b;
+        color: #fff;
+        transform: translateY(-2px) scale(1.03);
+      }
+
+      @media (max-width: 600px) {
+        .glass-card {
+          padding: 24px 12px;
+          max-width: 95vw;
+        }
+
+        .icon-title img {
+          width: 70px;
+        }
+
+        .icon-title h1 {
+          font-size: 1.2rem;
+        }
+
+        .desc {
+          font-size: 0.95rem;
+        }
+
+        .actions a {
+          font-size: 0.95rem;
+          padding: 12px 18px;
+        }
+      }
+      /* Reset + universal centering */
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", "Inter", Arial, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        display: flex;
+        align-items: center; /* vertical center */
+        justify-content: center; /* horizontal center */
+        padding: 20px; /* prevents content touching edges on small screens */
+        box-sizing: border-box;
+      }
+
+      /* Glass card container */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+        border-radius: 24px;
+        padding: 40px;
+        width: 100%;
+        max-width: 900px; /* scales nicely on large screens */
+        backdrop-filter: blur(8px);
+        border: 1.5px solid rgba(180, 200, 255, 0.18);
+        text-align: center;
+      }
+
+      /* Responsive typography */
+      h1 {
+        font-size: clamp(
+          1.5rem,
+          4vw,
+          2.5rem
+        ); /* scales between mobile and desktop */
+        margin: 0.5em 0;
+      }
+
+      p {
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        line-height: 1.6;
+      }
+
+      /* Responsive grid for cards */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      /* Buttons */
+      a {
+        display: inline-block;
+        padding: clamp(10px, 2vw, 14px) clamp(16px, 4vw, 26px);
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      /* Stack buttons vertically on very small screens */
+      @media (max-width: 400px) {
+        .actions {
+          flex-direction: column;
+          gap: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="glass-card">
+      <div class="icon-title">
+        <img src="logo.PNG" alt="Driving Clearance Report System Logo" />
+        <h1>Driving Clearance<br />Report System</h1>
+      </div>
+      <div class="desc">
+        <p><b>"Drive Smart, Clear Report."</b></p>
+        <p>
+          Making roads safer by connecting drivers and officers through a
+          simple, transparent system.
+        </p>
+      </div>
+      <div class="actions">
+        <a href="learn_more.html" class="primary">Learn More</a>
+        <a href="role.html" class="secondary">Get Started</a>
+      </div>
+    </div>
+  </body>
+</html>
