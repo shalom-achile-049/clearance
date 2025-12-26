@@ -1,213 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Driver Home</title>
+    <style>
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", "Inter", Arial, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Driver Home</title>
-  <style>
-    body {
-      min-height: 100vh;
-      margin: 0;
-      font-family: "Segoe UI", "Inter", Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+        border-radius: 24px;
+        padding: 40px;
+        max-width: 900px;
+        width: 95%;
+        backdrop-filter: blur(8px);
+        border: 1.5px solid rgba(180, 200, 255, 0.18);
+      }
 
-    .glass-card {
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
-      border-radius: 24px;
-      padding: 40px;
-      max-width: 900px;
-      width: 95%;
-      backdrop-filter: blur(8px);
-      border: 1.5px solid rgba(180, 200, 255, 0.18);
-    }
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
 
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+      header img {
+        width: 80px;
+        height: auto;
+        filter: drop-shadow(0 2px 8px #b6c6e6);
+        border-radius: 12px;
+      }
 
-    header img {
-      width: 80px;
-      height: auto;
-      filter: drop-shadow(0 2px 8px #b6c6e6);
-      border-radius: 12px;
-    }
+      header h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #1e293b;
+        margin: 10px 0 0;
+      }
 
-    header h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #1e293b;
-      margin: 10px 0 0;
-    }
+      .welcome {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #334155;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
 
-    .welcome {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #334155;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
+      .card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(30, 41, 59, 0.1);
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
 
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(30, 41, 59, 0.1);
-      text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(30, 41, 59, 0.15);
+      }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 16px rgba(30, 41, 59, 0.15);
-    }
+      .card h2 {
+        font-size: 1.3rem;
+        color: #1e293b;
+        margin-bottom: 12px;
+      }
 
-    .card h2 {
-      font-size: 1.3rem;
-      color: #1e293b;
-      margin-bottom: 12px;
-    }
+      .card p {
+        font-size: 0.95rem;
+        color: #475569;
+        margin-bottom: 16px;
+      }
 
-    .card p {
-      font-size: 0.95rem;
-      color: #475569;
-      margin-bottom: 16px;
-    }
+      .card a {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        background: linear-gradient(90deg, #0f172a 60%, #1e293b 100%);
+        color: #fff;
+        transition: background 0.2s ease;
+      }
 
-    .card a {
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      background: linear-gradient(90deg, #0f172a 60%, #1e293b 100%);
-      color: #fff;
-      transition: background 0.2s ease;
-    }
+      .card a:hover {
+        background: linear-gradient(90deg, #0c0c41 60%, #0b2041 100%);
+      }
 
-    .card a:hover {
-      background: linear-gradient(90deg, #0c0c41 60%, #0b2041 100%);
-    }
+      footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 0.85rem;
+        color: #64748b;
+      }
+      /* Reset + universal centering */
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", "Inter", Arial, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        display: flex;
+        align-items: center; /* vertical center */
+        justify-content: center; /* horizontal center */
+        padding: 20px; /* prevents content touching edges on small screens */
+        box-sizing: border-box;
+      }
 
-    footer {
-      text-align: center;
-      margin-top: 30px;
-      font-size: 0.85rem;
-      color: #64748b;
-    }
-    /* Reset + universal centering */
-body {
-  min-height: 100vh;
-  margin: 0;
-  font-family: "Segoe UI", "Inter", Arial, sans-serif;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  display: flex;
-  align-items: center;   /* vertical center */
-  justify-content: center; /* horizontal center */
-  padding: 20px; /* prevents content touching edges on small screens */
-  box-sizing: border-box;
-}
+      /* Glass card container */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+        border-radius: 24px;
+        padding: 40px;
+        width: 100%;
+        max-width: 900px; /* scales nicely on large screens */
+        backdrop-filter: blur(8px);
+        border: 1.5px solid rgba(180, 200, 255, 0.18);
+        text-align: center;
+      }
 
-/* Glass card container */
-.glass-card {
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
-  border-radius: 24px;
-  padding: 40px;
-  width: 100%;
-  max-width: 900px; /* scales nicely on large screens */
-  backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(180, 200, 255, 0.18);
-  text-align: center;
-}
+      /* Responsive typography */
+      h1 {
+        font-size: clamp(
+          1.5rem,
+          4vw,
+          2.5rem
+        ); /* scales between mobile and desktop */
+        margin: 0.5em 0;
+      }
 
-/* Responsive typography */
-h1 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem); /* scales between mobile and desktop */
-  margin: 0.5em 0;
-}
+      p {
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        line-height: 1.6;
+      }
 
-p {
-  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-  line-height: 1.6;
-}
+      /* Responsive grid for cards */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
 
-/* Responsive grid for cards */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
+      /* Buttons */
+      a {
+        display: inline-block;
+        padding: clamp(10px, 2vw, 14px) clamp(16px, 4vw, 26px);
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
 
-/* Buttons */
-a {
-  display: inline-block;
-  padding: clamp(10px, 2vw, 14px) clamp(16px, 4vw, 26px);
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
+      /* Stack buttons vertically on very small screens */
+      @media (max-width: 400px) {
+        .actions {
+          flex-direction: column;
+          gap: 12px;
+        }
+      }
+    </style>
+  </head>
 
-/* Stack buttons vertically on very small screens */
-@media (max-width: 400px) {
-  .actions {
-    flex-direction: column;
-    gap: 12px;
-  }
-}
+  <body>
+    <div class="glass-card">
+      <header>
+        <a href="index.html">
+          <img src="logo.PNG" alt="Driving Clearance Logo" />
+        </a>
+        <h1>Driver Home</h1>
+      </header>
 
-  </style>
-</head>
+      <div class="welcome">
+        <p>
+          Welcome, Driver! Manage your clearance reports, track your driving
+          history, and stay road‑ready.
+        </p>
+      </div>
 
-<body>
-  <div class="glass-card">
-    <header>
-      <img src="logo.PNG" alt="Driving Clearance Logo">
-      <h1>Driver Home</h1>
-    </header>
+      <div class="grid">
+        <div class="card">
+          <h2>My Reports</h2>
+          <p>View and download your driving clearance reports anytime.</p>
+          <a href="driver_reports.php">View Reports</a>
+        </div>
 
-    <div class="welcome">
-      <p>Welcome, Driver! Manage your clearance reports, track your driving history, and stay road‑ready.</p>
+        <div class="card">
+          <h2>Driving History</h2>
+          <p>Check your past records and monitor your driving performance.</p>
+          <a href="driver_history.php">View History</a>
+        </div>
+
+        <div class="card">
+          <h2>Profile Settings</h2>
+          <p>Update your personal information and account preferences.</p>
+          <a href="driver_profile.php">Edit Profile</a>
+        </div>
+      </div>
+
+      <footer>
+        <p>&copy; 2025 Driving Clearance Report System. All rights reserved.</p>
+      </footer>
     </div>
-
-    <div class="grid">
-      <div class="card">
-        <h2>My Reports</h2>
-        <p>View and download your driving clearance reports anytime.</p>
-        <a href="driver_reports.php">View Reports</a>
-      </div>
-
-      <div class="card">
-        <h2>Driving History</h2>
-        <p>Check your past records and monitor your driving performance.</p>
-        <a href="driver_history.php">View History</a>
-      </div>
-
-      <div class="card">
-        <h2>Profile Settings</h2>
-        <p>Update your personal information and account preferences.</p>
-        <a href="driver_profile.php">Edit Profile</a>
-      </div>
-    </div>
-
-    <footer>
-      <p>&copy; 2025 Driving Clearance Report System. All rights reserved.</p>
-    </footer>
-  </div>
-</body>
-
+  </body>
 </html>
