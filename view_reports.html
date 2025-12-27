@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Reports - Driving Clearance</title>
+    <style>
+      html,
+      body {
+        height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", "Inter", Arial, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow: hidden; /* prevent body scroll */
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 24px;
+        padding: 20px;
+        width: 100%;
+        max-width: 900px;
+        height: 90vh; /* fixed height */
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+        backdrop-filter: blur(8px);
+        border: 1.5px solid rgba(180, 200, 255, 0.18);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Navigation bar inside card */
+      nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      nav .logo img {
+        height: 40px;
+        width: auto;
+      }
+
+      .menu-toggle {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .menu-toggle span {
+        font-size: 1rem;
+      }
+
+      .menu-toggle .icon {
+        width: 20px;
+        height: 2px;
+        background: #1e293b;
+        position: relative;
+      }
+
+      .menu-toggle .icon::before,
+      .menu-toggle .icon::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 2px;
+        background: #1e293b;
+        left: 0;
+      }
+
+      .menu-toggle .icon::before {
+        top: -6px;
+      }
+      .menu-toggle .icon::after {
+        top: 6px;
+      }
+
+      /* Dropdown menu */
+      .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+      }
+
+      .menu a {
+        display: block;
+        width: 100%;
+        padding: 12px 16px;
+        text-align: left;
+        text-decoration: none;
+        font-weight: 600;
+        color: #1e293b;
+        border-bottom: 1px solid #e2e8f0;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .menu a:last-child {
+        border-bottom: none;
+      }
+
+      .menu a:hover {
+        background: #f1f5f9;
+        color: #1e40af;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      header h1 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        color: #1e293b;
+        margin-bottom: 6px;
+      }
+
+      header p {
+        font-size: 1rem;
+        color: #475569;
+      }
+
+      /* Reports list scrollable */
+      .reports-list {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 8px;
+        scrollbar-width: none; /* hide by default in Firefox */
+      }
+
+      /* Hide scrollbar by default, show on hover */
+      .reports-list::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+
+      .reports-list:hover {
+        scrollbar-width: thin;
+        scrollbar-color: black transparent;
+      }
+
+      .reports-list:hover::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .reports-list:hover::-webkit-scrollbar-thumb {
+        background-color: black;
+        border-radius: 10px;
+      }
+
+      .report-item {
+        background: #f1f5f9;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 12px;
+        text-align: left;
+        transition: box-shadow 0.2s ease;
+      }
+
+      .report-item:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .report-item h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #1e293b;
+      }
+
+      .report-item p {
+        margin: 6px 0 0;
+        font-size: 0.9rem;
+        color: #64748b;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 600px) {
+        .glass-card {
+          padding: 16px;
+        }
+        nav {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .menu-toggle {
+          margin-top: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glass-card">
+      <!-- Nav inside card -->
+      <nav>
+        <div class="logo">
+          <img src="logo.PNG" alt="Driving Clearance Logo" />
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+          <span>Menu</span>
+          <div class="icon"></div>
+        </div>
+        <div class="menu" id="navMenu">
+          <a href="index.html">Home</a>
+          <a href="driver.html">Driver Dashboard</a>
+          <a href="officer.html">Officer Dashboard</a>
+          <a href="view_reports.html">View Reports</a>
+          <a href="profile_settings.html">Profile Settings</a>
+        </div>
+      </nav>
+
+      <!-- Page header -->
+      <header>
+        <h1>View Reports</h1>
+        <p>Review all submitted clearance reports.</p>
+      </header>
+
+      <!-- Reports list -->
+      <div class="reports-list">
+        <div class="report-item">
+          <h3>Report #001</h3>
+          <p>Driver: John Doe — Status: Cleared — Submitted: Jan 2025</p>
+        </div>
+        <div class="report-item">
+          <h3>Report #002</h3>
+          <p>
+            Driver: Jane Smith — Status: Pending Review — Submitted: Dec 2024
+          </p>
+        </div>
+        <div class="report-item">
+          <h3>Report #003</h3>
+          <p>
+            Driver: Alex Johnson — Status: Violation Noted — Submitted: Nov 2024
+          </p>
+        </div>
+        <div class="report-item">
+          <h3>Report #004</h3>
+          <p>Driver: Maria Lopez — Status: Cleared — Submitted: Oct 2024</p>
+        </div>
+        <!-- Add more report items here -->
+      </div>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("navMenu");
+        menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+      }
+    </script>
+  </body>
+</html>
